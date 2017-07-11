@@ -1,17 +1,10 @@
-// SYSTEM BUS RADIO
-// https://github.com/fulldecent/system-bus-radio
-// Copyright 2016 William Entriken
-// C++11 port by Ryou Ezoe
-
 #include <iostream>
 #include <iomanip>
 #include <chrono>
 #include <arm_neon.h>
 #include <stdlib.h>
 #include <inttypes.h>
-#include <cstring>
 #include <thread>
-#include <atomic>
 #include <mutex>
 #include <condition_variable>
 
@@ -21,12 +14,10 @@ std::chrono::high_resolution_clock::time_point mid ;
 std::chrono::high_resolution_clock::time_point reset ;
 
 int32x4_t va;
-int32_t a ;
 int32_t * ptr;
 int32_t n = 2500;
-int32_t mm = n-4;
-int32_t b[4];
 int64_t size = sizeof(a)*n;
+//int32_t mm = n-4;
 
 void inline boost_song()
 {
