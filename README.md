@@ -15,13 +15,13 @@ cd system-bus-radio-neon
 make
 ./neon
 ```
-Move the radio closer to the machine and try to match the frequency to 1000 kHz to 1600 kHz.
-You would hear the "Mary Had a Little Lamb" tune.
+Move the radio closer to the machine and try to match the frequency 1000 kHz to 1600 kHz.  
+You would hear the "Mary Had a Little Lamb" tune.  
 I used a receiver "Sony ICF-P36".
 
 # Worked Processors
 
-ARMv7 with NEON SoC
+ARMv7 with NEON SoC  
 ARMv8 with NEON SoC
 
 # Worked devices
