@@ -34,7 +34,7 @@ I used a receiver "Sony ICF-P36".
     * Z500M
 * tell me more!!
 
-# NOT worked devices
+# NOT(?) worked devices?
 
 * Le eco Lemax2
     * X820
