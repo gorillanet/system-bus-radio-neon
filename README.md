@@ -21,16 +21,25 @@ I used a receiver "Sony ICF-P36".
 
 # Worked Processors
 
-ARMv7 with NEON SoC  
-ARMv8 with NEON SoC
+* ARMv7 with NEON SoC
+* ARMv8 with NEON SoC
 
 # Worked devices
 
 * Raspberry pi 2
 * Raspberry pi 3
 * OnePlus 3
+    * A5000
 * ASUS Zenpad 3S 10
+    * Z500M
 * tell me more!!
+
+# NOT worked devices
+
+* Le eco Lemax2
+    * X820
+* Lenovo YOGA Tablet
+    * YT3-X50L
 
 # Relation
 An APK version(Android) will also be available soon.
