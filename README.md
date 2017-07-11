@@ -29,7 +29,7 @@ I used a receiver "Sony ICF-P36".
 * Raspberry pi 2
 * Raspberry pi 3
 * OnePlus 3
-    * A5000
+    * A3000
 * ASUS Zenpad 3S 10
     * Z500M
 * tell me more!!
