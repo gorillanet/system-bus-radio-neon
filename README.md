@@ -1,6 +1,6 @@
 # system-bus-radio-neon
 
-System Bus Radio for ARM NEON
+System Bus Radio for ARM NEON.  
 This program is influenced by [system-bus-radio](https://github.com/fulldecent/system-bus-radio)
 
 # What is this?
