@@ -42,4 +42,4 @@ I used a receiver "Sony ICF-P36".
     * YT3-X50L
 
 # Relation
-An APK version(Android) will also be available soon.
+APK version(Android) will also be available soon.
