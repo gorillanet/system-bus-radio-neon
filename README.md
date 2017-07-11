@@ -31,3 +31,6 @@ ARMv8 with NEON SoC
 * OnePlus 3
 * ASUS Zenpad 3S 10
 * tell me more!!
+
+# Relation
+An APK version(Android) will also be available soon.
