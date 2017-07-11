@@ -29,5 +29,5 @@ ARMv8 with NEON SoC
 * Raspberry pi 2
 * Raspberry pi 3
 * OnePlus 3
-* Zenpad 3S 10
+* ASUS Zenpad 3S 10
 * tell me more!!
