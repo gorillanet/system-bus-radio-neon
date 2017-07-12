@@ -19,28 +19,28 @@ int32_t a ;
 int32_t * ptr;
 int32_t n = 2500;
 int64_t size = sizeof(a)*n;
-static int sig{1};
-//int32_t mm = n-4;
+int32_t mm = n-4;
 
-void sig_handler(int sign) {
+void inline sig_handler(int sign) {
     free(ptr);
+    std::cout << "Received signal. aborting.\n" ;
     exit(-1);
 }
 
 void inline boost_song() {
     using namespace std::chrono ;
 
-    //int i{0} ;
+    int i{0} ;
     while( true ) {
         std::unique_lock<std::mutex> lk{m} ;
         cv.wait( lk ) ;
 
         while( high_resolution_clock::now() < mid ) {
-            int32_t var[4] = { *(ptr), *(ptr + 2), *(ptr + 3), *(ptr + 4) };
+            int32_t var[4] = { *(ptr + i), *(ptr + i + 2), *(ptr + i + 3), *(ptr + i + 4) };
             va = vld1q_s32(var);
-            //i++;
+            i++;
         }
-        //if(i==mm) i=0;
+        if(i==mm) i=0;
         std::this_thread::sleep_until( reset ) ;
     }
 }
