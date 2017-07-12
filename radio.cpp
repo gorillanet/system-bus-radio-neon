@@ -7,6 +7,7 @@
 #include <thread>
 #include <mutex>
 #include <condition_variable>
+#include <signal.h>
 
 std::mutex m ;
 std::condition_variable cv ;
