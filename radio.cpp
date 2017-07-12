@@ -39,8 +39,8 @@ void inline boost_song() {
             int32_t var[4] = { *(ptr + i), *(ptr + i + 2), *(ptr + i + 3), *(ptr + i + 4) };
             va = vld1q_s32(var);
             i++;
+            if(i==mm) i=0;
         }
-        if(i==mm) i=0;
         std::this_thread::sleep_until( reset ) ;
     }
 }
