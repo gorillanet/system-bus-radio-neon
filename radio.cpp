@@ -14,6 +14,7 @@ std::chrono::high_resolution_clock::time_point mid ;
 std::chrono::high_resolution_clock::time_point reset ;
 
 int32x4_t va;
+int32_t a ;
 int32_t * ptr;
 int32_t n = 2500;
 int64_t size = sizeof(a)*n;
