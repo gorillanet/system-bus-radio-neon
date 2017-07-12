@@ -10,7 +10,7 @@ This program transmits radio from computers or phones worked on ARM CPU.
 # How to use it
 
 ```
-git clone https://github.com/yamaken0103/system-bus-radio-neon
+git clone https://github.com/gorillanet/system-bus-radio-neon
 cd system-bus-radio-neon
 make
 ./neon
@@ -34,7 +34,7 @@ I used a receiver "Sony ICF-P36".
     * Z500M
 * tell me more!!
 
-# NOT(?) worked devices?
+# NOT(?) worked devices
 
 * Le eco Lemax2
     * X820
