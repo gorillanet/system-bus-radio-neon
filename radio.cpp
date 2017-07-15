@@ -23,7 +23,7 @@ int32_t limit = n-4;
 
 void inline sig_handler(int sign) {
     free(ptr);
-    std::cout << "\nReceived signal. aborting.\n" ;
+    std::cout << "\nReceived signal. aborting." << std::endl ;
     exit(-1);
 }
 
@@ -49,7 +49,7 @@ void inline boost_song() {
 int init_memory(void) {
     ptr = (int32_t *)malloc(size);
     if( ptr == NULL ){
-        std::cout << "Malloc Error\n";
+        std::cout << "Malloc Error" << std::endl;
         return -1;
     }
     for(int i=0; i<=n; i++){
