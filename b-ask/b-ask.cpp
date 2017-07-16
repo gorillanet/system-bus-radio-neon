@@ -15,11 +15,12 @@ std::chrono::high_resolution_clock::time_point mid ;
 std::chrono::high_resolution_clock::time_point reset ;
 
 int32x4_t va;
-int32_t a ;
-int32_t * ptr;
-int32_t n = 2500;
-int64_t size = sizeof(a)*n;
-int32_t limit = n-4;
+std::int32_t a ;
+std::int32_t * ptr;
+std::int32_t n = 2500;
+std::int64_t size = sizeof(a)*n;
+std::int32_t limit = n-4;
+std::int32_t data_bit[] = {1, 0, 0, 1};
 
 void inline sig_handler(int sign) {
     free(ptr);
