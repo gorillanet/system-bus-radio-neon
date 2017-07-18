@@ -11,7 +11,7 @@
 
 std::mutex m ;
 std::condition_variable cv ;
-std::chrono::high_resolution_clock::time_point mid ;
+std::chrono::high_resolution_clock::time_point end ;
 std::chrono::high_resolution_clock::time_point reset ;
 
 int32x4_t va;
@@ -20,7 +20,7 @@ std::int32_t * ptr;
 std::int32_t n = 2500;
 std::int64_t size = sizeof(a)*n;
 std::int32_t limit = n-4;
-std::int32_t data_bit[] = {1, 0, 0, 1};
+std::int32_t data_bit[] = {1, 0, 1, 0};
 
 void inline sig_handler(int sign) {
     free(ptr);
@@ -69,17 +69,16 @@ void send_data(float time) {
 
     for(int32_t d : data_bit){
         auto start = high_resolution_clock::now() ;
+        auto end = start + nanoseconds( static_cast<rep>(time * nsec_per_sec) ) ;
+
         if( d == 1 ){
-            std::cout << "Detected 1 bit" << std::endl;
+            //std::cout << "Detected 1 bit" << std::endl;
             while (high_resolution_clock::now() < end) {
-                auto end = start + nanoseconds( static_cast<rep>(time * nsec_per_sec) ) ;
                 cv.notify_all() ;
                 std::this_thread::sleep_until( end ) ;
-                start = reset;
             }
         }
         else{
-            auto end = start + nanoseconds( static_cast<rep>(time * nsec_per_sec) ) ;
             std::this_thread::sleep_until( end ) ;
         }
     }
@@ -93,7 +92,40 @@ int main(){
         std::thread t( boost_song ) ;
         t.detach() ;
     }
-    send_data(0.05);
+    while(1){
+        //std::cout << "send data {1,0,0,1}" <<std::endl;
+        //send_data(0.000374111485223/2);
+        send_data(0.000425713069391/2);
+        //std::cout << "complete" <<std::endl;
+/*/TEST
+        send_data(0.400, 1/(2673*2));
+        send_data(0.400, 1/(2349*2));
+        send_data(0.400, 1/(2093*2));
+        send_data(0.400, 1/(2349*2));
+        send_data(0.400, 1/(2673*2));
+        send_data(0.400, 1/(2673*2));
+        send_data(0.790, 1/(2673*2));
+        send_data(0.400, 1/(2349*2));
+        send_data(0.400, 1/(2349*2));
+        send_data(0.790, 1/(2349*2));
+        send_data(0.400, 1/(2673*2));
+        send_data(0.400, 1/(3136*2));
+        send_data(0.790, 1/(3136*2));
+        send_data(0.400, 1/(2673*2));
+        send_data(0.400, 1/(2349*2));
+        send_data(0.400, 1/(2093*2));
+        send_data(0.400, 1/(2349*2));
+        send_data(0.400, 1/(2673*2));
+        send_data(0.400, 1/(2673*2));
+        send_data(0.400, 1/(2673*2));
+        send_data(0.400, 1/(2673*2));
+        send_data(0.400, 1/(2349*2));
+        send_data(0.400, 1/(2349*2));
+        send_data(0.400, 1/(2673*2));
+        send_data(0.400, 1/(2349*2));
+        send_data(0.790, 1/(2093*2));
+//END::TEST */
+    }
     free(ptr);
     return 0;
 }
