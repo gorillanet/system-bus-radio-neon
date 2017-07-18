@@ -59,7 +59,7 @@ int init_memory(void) {
     return 0;
 }
 
-void square_am_signal(float time) {
+void send_data(float time) {
     using namespace std::chrono ;
 
     seconds const sec{1} ;
@@ -67,13 +67,20 @@ void square_am_signal(float time) {
     using rep = nanoseconds::rep ;
     auto nsec_per_sec = nsec.count() ;
 
-    auto start = high_resolution_clock::now() ;
-    auto const end = start + nanoseconds( static_cast<rep>(0.1 * nsec_per_sec) ) ;
-
-    while (high_resolution_clock::now() < end) {
-        cv.notify_all() ;
-        std::this_thread::sleep_until( end ) ;
-        start = reset;
+    for(int32_t d : data_bit){
+        auto start = high_resolution_clock::now() ;
+        auto const end = start + nanoseconds( static_cast<rep>(time * nsec_per_sec) ) ;
+        if( d == 1 ){
+            std::cout << "Detected 1 bit" << std::endl;
+            while (high_resolution_clock::now() < end) {
+                cv.notify_all() ;
+                std::this_thread::sleep_until( end ) ;
+                start = reset;
+            }
+        }
+        else{
+            std::this_thread::sleep_until( end ) ;
+        }
     }
 }
 
@@ -85,7 +92,7 @@ int main(){
         std::thread t( boost_song ) ;
         t.detach() ;
     }
-    square_am_signal(0.05);
+    send_data(0.05);
     free(ptr);
     return 0;
 }
