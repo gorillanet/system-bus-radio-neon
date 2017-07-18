@@ -69,7 +69,7 @@ void send_data(float time) {
 
     for(int32_t d : data_bit){
         auto start = high_resolution_clock::now() ;
-        auto const end = start + nanoseconds( static_cast<rep>(time * nsec_per_sec) ) ;
+        auto end = start + nanoseconds( static_cast<rep>(time * nsec_per_sec) ) ;
         if( d == 1 ){
             std::cout << "Detected 1 bit" << std::endl;
             while (high_resolution_clock::now() < end) {
