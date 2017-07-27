@@ -20,7 +20,8 @@ std::int32_t * ptr;
 std::int32_t n = 2500;
 std::int64_t size = sizeof(a)*n;
 std::int32_t limit = n-4;
-std::int32_t data_bit[] = {1, 0, 1, 0};
+//std::int32_t data_bit[] = {1, 1, 1, 1, 1, 0, 1, 0};
+std::int32_t data_bit[] = {1, 0, 1, 0};     //square audio
 
 void inline sig_handler(int sign) {
     free(ptr);
@@ -37,7 +38,7 @@ void inline boost_song() {
         cv.wait( lk ) ;
 
         while( high_resolution_clock::now() < end ) {
-            int32_t var[4] = { *(ptr + i), *(ptr + i + 2), *(ptr + i + 3), *(ptr + i + 4) };
+            int32_t var[4] = { *(ptr + i), *(ptr + i + 1), *(ptr + i + 2), *(ptr + i + 3) };
             va = vld1q_s32(var);
             i++;
             if(i==limit) i=0;
@@ -72,7 +73,6 @@ void send_data(float time) {
         auto end = start + nanoseconds( static_cast<rep>(time * nsec_per_sec) ) ;
 
         if( d == 1 ){
-            //std::cout << "Detected 1 bit" << std::endl;
             while (high_resolution_clock::now() < end) {
                 cv.notify_all() ;
                 std::this_thread::sleep_until( end ) ;
