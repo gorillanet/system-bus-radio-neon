@@ -36,8 +36,8 @@ void inline boost_song() {
         cv.wait( lk ) ;
 
         while( high_resolution_clock::now() < mid ) {
-            int32_t var[4] = { *(ptr + i), *(ptr + i + 2), *(ptr + i + 3), *(ptr + i + 4) };
-            va = vld1q_s32(var);
+//            int32_t var[4] = { *(ptr + i), *(ptr + i + 2), *(ptr + i + 3), *(ptr + i + 4) };
+            va = vld1q_s32(ptr+i);
             i++;
             if(i==limit) i=0;
         }
