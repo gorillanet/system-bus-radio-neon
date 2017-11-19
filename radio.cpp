@@ -81,7 +81,7 @@ void square_am_signal(float time, float frequency) {
     }
 }
 
-int main(char *argv[]){
+int main(int argc, char *argv[]){
     signal(SIGINT, sig_handler);
 
     init_memory();
