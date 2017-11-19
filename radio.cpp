@@ -81,7 +81,7 @@ void square_am_signal(float time, float frequency) {
     }
 }
 
-int main(){
+int main(char *argv[]){
     signal(SIGINT, sig_handler);
 
     init_memory();
@@ -89,33 +89,46 @@ int main(){
         std::thread t( boost_song ) ;
         t.detach() ;
     }
-    while (1) {
-        square_am_signal(0.400, 2673);
-        square_am_signal(0.400, 2349);
-        square_am_signal(0.400, 2093);
-        square_am_signal(0.400, 2349);
-        square_am_signal(0.400, 2673);
-        square_am_signal(0.400, 2673);
-        square_am_signal(0.790, 2673);
-        square_am_signal(0.400, 2349);
-        square_am_signal(0.400, 2349);
-        square_am_signal(0.790, 2349);
-        square_am_signal(0.400, 2673);
-        square_am_signal(0.400, 3136);
-        square_am_signal(0.790, 3136);
-        square_am_signal(0.400, 2673);
-        square_am_signal(0.400, 2349);
-        square_am_signal(0.400, 2093);
-        square_am_signal(0.400, 2349);
-        square_am_signal(0.400, 2673);
-        square_am_signal(0.400, 2673);
-        square_am_signal(0.400, 2673);
-        square_am_signal(0.400, 2673);
-        square_am_signal(0.400, 2349);
-        square_am_signal(0.400, 2349);
-        square_am_signal(0.400, 2673);
-        square_am_signal(0.400, 2349);
-        square_am_signal(0.790, 2093);
+    if (argv[1]=="zelda")
+        while(1){
+            square_am_signal(0.200, 1480);
+            square_am_signal(0.200, 1397);
+            square_am_signal(0.200, 1175);
+            square_am_signal(0.200, 1661);
+            square_am_signal(0.200, 1568);
+            square_am_signal(0.200, 1245);
+            square_am_signal(0.200, 1568);
+            square_am_signal(0.200, 1976);
+        }
+    else{
+        while (1) {
+            square_am_signal(0.400, 2673);
+            square_am_signal(0.400, 2349);
+            square_am_signal(0.400, 2093);
+            square_am_signal(0.400, 2349);
+            square_am_signal(0.400, 2673);
+            square_am_signal(0.400, 2673);
+            square_am_signal(0.790, 2673);
+            square_am_signal(0.400, 2349);
+            square_am_signal(0.400, 2349);
+            square_am_signal(0.790, 2349);
+            square_am_signal(0.400, 2673);
+            square_am_signal(0.400, 3136);
+            square_am_signal(0.790, 3136);
+            square_am_signal(0.400, 2673);
+            square_am_signal(0.400, 2349);
+            square_am_signal(0.400, 2093);
+            square_am_signal(0.400, 2349);
+            square_am_signal(0.400, 2673);
+            square_am_signal(0.400, 2673);
+            square_am_signal(0.400, 2673);
+            square_am_signal(0.400, 2673);
+            square_am_signal(0.400, 2349);
+            square_am_signal(0.400, 2349);
+            square_am_signal(0.400, 2673);
+            square_am_signal(0.400, 2349);
+            square_am_signal(0.790, 2093);
+        }
     }
     free(ptr);
     return 0;
