@@ -60,8 +60,8 @@ int init_memory(void) {
 
 void square_am_signal(float time, float frequency) {
     using namespace std::chrono ;
-    
-    std::cout << "Playing / " << time << " seconds / " << frequency << " Hz\n" ;
+
+//    std::cout << "Playing / " << time << " seconds / " << frequency << " Hz\n" ;
 
     seconds const sec{1} ;
     nanoseconds const nsec{ sec } ;
@@ -89,11 +89,9 @@ int main(int argc, char* argv[]){
         return 1;
     }
 
-    if (argc == 1 ){
-        t = 1.0;
+    if (argv[1] != NULL ){
+        t = atof(argv[1]);
     }
-
-    t = argv[1];
 
     signal(SIGINT, sig_handler);
 

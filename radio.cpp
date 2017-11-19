@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <iomanip>
 #include <chrono>
 #include <arm_neon.h>
@@ -89,17 +90,21 @@ int main(int argc, char *argv[]){
         std::thread t( boost_song ) ;
         t.detach() ;
     }
-    if (argv[1]=="zelda")
-        while(1){
-            square_am_signal(0.200, 1480);
-            square_am_signal(0.200, 1397);
-            square_am_signal(0.200, 1175);
-            square_am_signal(0.200, 1661);
-            square_am_signal(0.200, 1568);
-            square_am_signal(0.200, 1245);
-            square_am_signal(0.200, 1568);
-            square_am_signal(0.200, 1976);
+    if (argc ==2){
+        std::string str = argv[1];
+        if (str=="zelda"){
+            while(1){
+                square_am_signal(0.150, 1480);
+                square_am_signal(0.150, 1397);
+                square_am_signal(0.150, 1175);
+                square_am_signal(0.150, 1661);
+                square_am_signal(0.150, 1568);
+                square_am_signal(0.150, 1245);
+                square_am_signal(0.150, 1568);
+                square_am_signal(0.200, 1976);
+            }
         }
+    }
     else{
         while (1) {
             square_am_signal(0.400, 2673);
