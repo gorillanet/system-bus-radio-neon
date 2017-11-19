@@ -94,14 +94,14 @@ int main(int argc, char *argv[]){
         std::string str = argv[1];
         if (str=="zelda"){
             while(1){
+                square_am_signal(0.150, 1568);
                 square_am_signal(0.150, 1480);
-                square_am_signal(0.150, 1397);
-                square_am_signal(0.150, 1175);
-                square_am_signal(0.150, 1661);
-                square_am_signal(0.150, 1568);
                 square_am_signal(0.150, 1245);
-                square_am_signal(0.150, 1568);
-                square_am_signal(0.200, 1976);
+                square_am_signal(0.150, 880);
+                square_am_signal(0.150, 831);
+                square_am_signal(0.150, 1319);
+                square_am_signal(0.150, 1661);
+                square_am_signal(0.200, 2093);
             }
         }
     }
