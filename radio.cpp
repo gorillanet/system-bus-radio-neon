@@ -41,7 +41,6 @@ void inline boost_song() {
             i++;
             if(i==limit) i=0;
         }
-        
         std::this_thread::sleep_until( reset ) ;
     }
 }
