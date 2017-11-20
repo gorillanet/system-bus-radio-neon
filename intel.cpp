@@ -31,24 +31,6 @@ void inline sig_handler(int sign) {
     exit(-1);
 }
 
-void inline boost_song() {
-    using namespace std::chrono ;
-
-    int i{0} ;
-    while( true ) {
-        std::unique_lock<std::mutex> lk{m} ;
-        cv.wait( lk ) ;
-
-        while( high_resolution_clock::now() < mid ) {
-            _mm_stream_si128(&reg, reg_one);
-            _mm_stream_si128(&reg, reg_zero);
-            i++;
-            if(i==limit) i=0;
-        }
-        std::this_thread::sleep_until( reset ) ;
-    }
-}
-
 int init_memory(void) {
     ptr = (int32_t *)malloc(size);
     if( ptr == NULL ){
@@ -79,8 +61,12 @@ void square_am_signal(float time, float frequency) {
     while (high_resolution_clock::now() < end) {
         mid = start + period / 2 ;
         reset = start + period ;
-        cv.notify_all() ;
-        std::this_thread::sleep_until( reset ) ;
+        while( high_resolution_clock::now() < mid ) {
+            _mm_stream_si128(&reg, reg_one);
+            _mm_stream_si128(&reg, reg_zero);
+            i++;
+            if(i==limit) i=0;
+        }
         start = reset;
     }
 }
@@ -92,10 +78,6 @@ int main(int argc, char *argv[]){
     reg_one = _mm_set_epi32(-1, -1, -1, -1);
 
     init_memory();
-    for ( unsigned i = 0 ; i < std::thread::hardware_concurrency() ; ++i ) {
-        std::thread t( boost_song ) ;
-        t.detach() ;
-    }
     if (argc ==2){
         std::string str = argv[1];
         if (str=="zelda"){
