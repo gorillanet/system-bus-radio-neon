@@ -15,7 +15,6 @@ std::condition_variable cv ;
 std::chrono::high_resolution_clock::time_point mid ;
 std::chrono::high_resolution_clock::time_point reset ;
 
-int32x4_t va;
 int32_t a ;
 int32_t * ptr;
 int32_t n = 2500;
@@ -25,9 +24,6 @@ int32_t limit = n-4;
 __m128i reg;
 __m128i reg_zero;
 __m128i reg_one;
-
-reg_zero = _mm_set_epi32(0, 0, 0, 0);
-reg_one = _mm_set_epi32(-1, -1, -1, -1);
 
 void inline sig_handler(int sign) {
     free(ptr);
@@ -91,6 +87,9 @@ void square_am_signal(float time, float frequency) {
 
 int main(int argc, char *argv[]){
     signal(SIGINT, sig_handler);
+
+    reg_zero = _mm_set_epi32(0, 0, 0, 0);
+    reg_one = _mm_set_epi32(-1, -1, -1, -1);
 
     init_memory();
     for ( unsigned i = 0 ; i < std::thread::hardware_concurrency() ; ++i ) {
