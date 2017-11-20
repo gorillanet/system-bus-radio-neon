@@ -104,8 +104,9 @@ int main(int argc, char* argv[]){
     for (int i=0; i<10000; i++) {
         square_am_signal(t, 2000);
         square_am_signal(t, 3000);
-        if(c<1000){
+        if(c>500){
             square_am_signal(1, 4000);
+            c=0;
         }
         c++;
     }
