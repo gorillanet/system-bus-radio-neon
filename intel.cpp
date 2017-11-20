@@ -2,7 +2,7 @@
 #include <string>
 #include <iomanip>
 #include <chrono>
-#include <arm_neon.h>
+#include <emmintrin.h>
 #include <stdlib.h>
 #include <inttypes.h>
 #include <thread>
@@ -22,6 +22,13 @@ int32_t n = 2500;
 int64_t size = sizeof(a)*n;
 int32_t limit = n-4;
 
+__m128i reg;
+__m128i reg_zero;
+__m128i reg_one;
+
+reg_zero = _mm_set_epi32(0, 0, 0, 0);
+reg_one = _mm_set_epi32(-1, -1, -1, -1);
+
 void inline sig_handler(int sign) {
     free(ptr);
     std::cout << "\nReceived signal. aborting." << std::endl ;
@@ -37,8 +44,8 @@ void inline boost_song() {
         cv.wait( lk ) ;
 
         while( high_resolution_clock::now() < mid ) {
-//            int32_t var[4] = { *(ptr + i), *(ptr + i + 2), *(ptr + i + 3), *(ptr + i + 4) };
-            va = vld1q_s32(ptr+i);
+            _mm_stream_si128(&reg, reg_one);
+            _mm_stream_si128(&reg, reg_zero);
             i++;
             if(i==limit) i=0;
         }
