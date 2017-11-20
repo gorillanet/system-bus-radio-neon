@@ -100,7 +100,7 @@ int main(int argc, char* argv[]){
         std::thread t( boost_song ) ;
         t.detach() ;
     }
-    while (1) {
+    for (int i=0; i<10000; i++) {
         square_am_signal(t, 2000);
         square_am_signal(t, 3000);
     }
