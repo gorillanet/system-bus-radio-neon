@@ -2,7 +2,7 @@
 #include <string>
 #include <iomanip>
 #include <chrono>
-#include <emmintrin.h>
+#include <arm_neon.h>
 #include <stdlib.h>
 #include <inttypes.h>
 #include <thread>
@@ -15,12 +15,24 @@ std::condition_variable cv ;
 std::chrono::high_resolution_clock::time_point mid ;
 std::chrono::high_resolution_clock::time_point reset ;
 
+int32x4_t va;
+int32_t a ;
+int32_t * ptr;
 int32_t n = 2500;
+int64_t size = sizeof(a)*n;
 int32_t limit = n-4;
 
-__m128i reg;
-__m128i reg_zero;
-__m128i reg_one;
+int init_memory(void) {
+    ptr = (int32_t *)malloc(size);
+    if( ptr == NULL ){
+        std::cout << "Malloc Error" << std::endl;
+        return -1;
+    }
+    for(int i=0; i<=n; i++){
+        ptr[i] = i;
+    }
+    return 0;
+}
 
 void inline sig_handler(int sign) {
     std::cout << "\nReceived signal. aborting." << std::endl ;
@@ -48,8 +60,9 @@ void square_am_signal(float time, float frequency) {
         reset = start + period ;
         int i = 0;
         while( high_resolution_clock::now() < mid ) {
-            _mm_stream_si128(&reg, reg_one);
-            _mm_stream_si128(&reg, reg_zero);
+            va = vld1q_s32(ptr+i);
+            i++;
+            if(i==limit) i=0;
         }
         std::this_thread::sleep_until( reset ) ;
         start = reset;
@@ -59,25 +72,7 @@ void square_am_signal(float time, float frequency) {
 int main(int argc, char *argv[]){
     signal(SIGINT, sig_handler);
 
-    reg_zero = _mm_set_epi32(0, 0, 0, 0);
-    reg_one = _mm_set_epi32(-1, -1, -1, -1);
-
-    if (argc ==2){
-        std::string str = argv[1];
-        if (str=="zelda"){
-            while(1){
-                square_am_signal(0.150, 1568);
-                square_am_signal(0.150, 1480);
-                square_am_signal(0.150, 1245);
-                square_am_signal(0.150, 880);
-                square_am_signal(0.150, 831);
-                square_am_signal(0.150, 1319);
-                square_am_signal(0.150, 1661);
-                square_am_signal(0.200, 2093);
-            }
-        }
-    }
-    else{
+    init_memory();
         while (1) {
             square_am_signal(0.400, 2673);
             square_am_signal(0.400, 2349);
@@ -105,7 +100,6 @@ int main(int argc, char *argv[]){
             square_am_signal(0.400, 2673);
             square_am_signal(0.400, 2349);
             square_am_signal(0.790, 2093);
-        }
     }
     return 0;
 }
