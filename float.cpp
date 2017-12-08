@@ -20,6 +20,7 @@ double * ptr;
 int64_t n = 2500;
 int64_t size = sizeof(n)*n;
 int32_t limit = n-4;
+double f = 3.1415; 
 
 
 
@@ -60,7 +61,7 @@ void square_am_signal(float time, float frequency) {
         reset = start + period ;
         int i = 0.0;
         while( high_resolution_clock::now() < mid ) {
-            *ptr = 1 - log(*(ptr + i)) / 1.7193;
+            f = 1 - log(f) / 1.7193;
             i++;
             if(i==limit) i=0;
         }
