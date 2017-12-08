@@ -24,11 +24,22 @@ __m128i reg_one;
 
 float f = 3.1415;
 
-void inline sig_handler(int sign) {
-    std::cout << "\nReceived signal. aborting." << std::endl ;
-    exit(-1);
-}
 
+void inline boost_song() {
+    using namespace std::chrono ;
+
+    int i{0} ;
+    while( true ) {
+        std::unique_lock<std::mutex> lk{m} ;
+        cv.wait( lk ) ;
+
+        while( high_resolution_clock::now() < mid ) {
+            _mm_stream_si128(&reg, reg_one);
+            _mm_stream_si128(&reg, reg_zero);
+        }
+        std::this_thread::sleep_until( reset ) ;
+    }
+}
 
 void square_am_signal(float time, float frequency) {
     using namespace std::chrono ;
@@ -48,18 +59,13 @@ void square_am_signal(float time, float frequency) {
     while (high_resolution_clock::now() < end) {
         mid = start + period / 2 ;
         reset = start + period ;
-        int i = 0;
-        while( high_resolution_clock::now() < mid ) {
-            _mm_stream_si128(&reg, reg_one);
-            _mm_stream_si128(&reg, reg_zero);
-        }
+        cv.notify_all() ;
         std::this_thread::sleep_until( reset ) ;
         start = reset;
     }
 }
 
 int main(int argc, char *argv[]){
-    signal(SIGINT, sig_handler);
 
     reg_zero = _mm_set_epi32(0, 0, 0, 0);
     reg_one = _mm_set_epi32(-1, -1, -1, -1);
