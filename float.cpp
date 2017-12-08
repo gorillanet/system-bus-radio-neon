@@ -60,7 +60,7 @@ void square_am_signal(float time, float frequency) {
         reset = start + period ;
         double i = 0.0;
         while( high_resolution_clock::now() < mid ) {
-            *ptr = log(ptr + i)*2.0;
+            *ptr = log(*(ptr + i))*2.0;
             i++;
             if(i==limit) i=0;
         }
