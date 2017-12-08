@@ -35,7 +35,7 @@ int init_memory(void) {
         return -1;
     }
     for(int i=0; i<=n; i++){
-        ptr[i] = i*20.01;
+        ptr[i] = 3.1415;
     }
     return 0;
 }
@@ -60,7 +60,7 @@ void square_am_signal(float time, float frequency) {
         reset = start + period ;
         int i = 0.0;
         while( high_resolution_clock::now() < mid ) {
-            *ptr = log(*(ptr + i))*2.0;
+            *ptr = 1 - log(*(ptr + i)) / 1.7193;
             i++;
             if(i==limit) i=0;
         }
