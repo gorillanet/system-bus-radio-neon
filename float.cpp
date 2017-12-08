@@ -16,9 +16,9 @@ std::condition_variable cv ;
 std::chrono::high_resolution_clock::time_point mid ;
 std::chrono::high_resolution_clock::time_point reset ;
 
-float32_t * ptr;
+float * ptr;
 int32_t n = 2500;
-int64_t size = sizeof(a)*n;
+int64_t size = sizeof(n)*n;
 int32_t limit = n-4;
 
 
@@ -29,7 +29,7 @@ void inline sig_handler(int sign) {
 }
 
 int init_memory(void) {
-    ptr = (float32_t *)malloc(size);
+    ptr = (float *)malloc(size);
     if( ptr == NULL ){
         std::cout << "Malloc Error" << std::endl;
         return -1;
