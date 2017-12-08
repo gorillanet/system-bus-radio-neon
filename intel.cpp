@@ -22,7 +22,6 @@ __m128i reg;
 __m128i reg_zero;
 __m128i reg_one;
 
-float f = 3.1415;
 
 void inline sig_handler(int sign) {
     std::cout << "\nReceived signal. aborting." << std::endl ;
