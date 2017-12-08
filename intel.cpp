@@ -22,6 +22,8 @@ __m128i reg;
 __m128i reg_zero;
 __m128i reg_one;
 
+float f = 3.1415;
+
 void inline sig_handler(int sign) {
     std::cout << "\nReceived signal. aborting." << std::endl ;
     exit(-1);
@@ -48,8 +50,7 @@ void square_am_signal(float time, float frequency) {
         reset = start + period ;
         int i = 0;
         while( high_resolution_clock::now() < mid ) {
-            _mm_stream_si128(&reg, reg_one);
-            _mm_stream_si128(&reg, reg_zero);
+            f = 1 - Math.log(f) / 1.7193
         }
         std::this_thread::sleep_until( reset ) ;
         start = reset;
