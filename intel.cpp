@@ -9,6 +9,7 @@
 #include <mutex>
 #include <condition_variable>
 #include <signal.h>
+#include <math.h> 
 
 std::mutex m ;
 std::condition_variable cv ;
@@ -50,7 +51,7 @@ void square_am_signal(float time, float frequency) {
         reset = start + period ;
         int i = 0;
         while( high_resolution_clock::now() < mid ) {
-            f = 1 - Math.log(f) / 1.7193
+            f = 1 - log(f) / 1.7193
         }
         std::this_thread::sleep_until( reset ) ;
         start = reset;
