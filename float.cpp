@@ -2,17 +2,11 @@
 #include <string>
 #include <iomanip>
 #include <chrono>
-#include <emmintrin.h>
 #include <stdlib.h>
 #include <inttypes.h>
-#include <thread>
-#include <mutex>
-#include <condition_variable>
 #include <signal.h>
 #include <math.h>
 
-std::mutex m ;
-std::condition_variable cv ;
 std::chrono::high_resolution_clock::time_point mid ;
 std::chrono::high_resolution_clock::time_point reset ;
 
